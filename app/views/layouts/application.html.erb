@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>NinetyNineCats</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= csrf_meta_tags %>
-</head>
+  <head>
+    <title>NinetyNineCats</title>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= csrf_meta_tags %>
+  </head>
 <body>
 
-<%= yield %>
+  <div class="container content-main">
+    <div class="row">
+      <%= yield %>
+    </div>
+  </div>
 
-</body>
+  </body>
 </html>
