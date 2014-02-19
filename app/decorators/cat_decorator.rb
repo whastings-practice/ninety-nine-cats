@@ -28,4 +28,20 @@ class CatDecorator < Draper::Decorator
       ""
     end
   end
+
+  def form_url
+    if object.persisted?
+      h.cat_url(object)
+    else
+      h.cats_url
+    end
+  end
+
+  def submit_text
+    if object.persisted?
+      "Edit Cat"
+    else
+      "Add Cat"
+    end
+  end
 end

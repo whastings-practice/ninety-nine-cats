@@ -27,6 +27,23 @@ class CatsController < ApplicationController
     end
   end
 
+  def edit
+    @cat = Cat.find(params[:id]).decorate
+    render :edit
+  end
+
+  def update
+    cat = Cat.find(params[:id])
+    if cat.update_attributes(cat_params)
+      flash[:notice] = "Cat edited successfully!"
+      redirect_to cat_url(cat)
+    else
+      @cat = cat.decorate
+      flash.now[:errors] = cat.errors.full_messages
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def cat_params
