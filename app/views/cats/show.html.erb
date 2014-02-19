@@ -1,0 +1,23 @@
+<div class="col-md-12 cat-display">
+  <h1><%= @cat.name %></h1>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Age</th>
+        <th>Birth Date</th>
+        <th>Color</th>
+        <th>Sex</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @cat.age %></td>
+        <td><%= @cat.birth_date %></td>
+        <td><%= @cat.color %></td>
+        <td><%= @cat.sex %></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= link_to 'Go Back', cats_url, class: "btn btn-info" %>
+</div>
