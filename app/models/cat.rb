@@ -20,4 +20,12 @@ class Cat < ActiveRecord::Base
   validates :age, numericality: true
   validates :color, inclusion: { in: ALLOWED_COLORS }
   validates :sex, inclusion: { in: SEXES.keys }
+
+  has_many(
+    :rental_requests,
+    primary_key: :id,
+    foreign_key: :cat_id,
+    class_name: "CatRentalRequest",
+    dependent: :destroy
+  )
 end
