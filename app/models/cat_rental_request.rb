@@ -31,6 +31,23 @@ class CatRentalRequest < ActiveRecord::Base
     where(cat_id: cat_id).order(:start_date)
   end
 
+  def deny!
+    self.status = 'DENIED'
+    self.save!
+  end
+
+  def approve!
+    self.status = 'APPROVED'
+    self.class.transaction do
+      self.save!
+      overlapping_pending_requests.update_all(status: 'DENIED')
+    end
+  end
+
+  def pending?
+    self.status == 'PENDING'
+  end
+
   protected
 
   def check_status
@@ -42,6 +59,10 @@ class CatRentalRequest < ActiveRecord::Base
     if overlapping_requests.where(status: 'APPROVED').exists?
       errors[:status] << "cannot be approved while an overlapping request exists"
     end
+  end
+
+  def overlapping_pending_requests
+    overlapping_requests.where(status: 'PENDING')
   end
 
   private

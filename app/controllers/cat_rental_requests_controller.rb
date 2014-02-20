@@ -16,6 +16,18 @@ class CatRentalRequestsController < ApplicationController
     end
   end
 
+  def approve
+    rental_request = CatRentalRequest.find(params[:id])
+    rental_request.approve!
+    redirect_to cat_url(rental_request.cat)
+  end
+
+  def deny
+    rental_request = CatRentalRequest.find(params[:id])
+    rental_request.deny!
+    redirect_to cat_url(rental_request.cat)
+  end
+
   private
 
   def rental_request_params
