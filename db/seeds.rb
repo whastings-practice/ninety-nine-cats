@@ -38,4 +38,11 @@ ActiveRecord::Base.transaction do
     end_date: 8.days.from_now
   )
 
+  3.times do
+    User.create!(
+      user_name: Faker::Internet.user_name,
+      password: 'foobar'
+    )
+  end
+
 end
