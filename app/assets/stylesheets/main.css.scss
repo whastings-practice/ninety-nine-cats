@@ -28,8 +28,16 @@
 
 input[type="text"],
 input[type="date"],
+input[type="password"],
 select,
 textarea {
   @extend .form-control;
+}
+
+.user-controls {
+  padding: 10px;
+  .button_to {
+    float: right;
+  }
 }
 
