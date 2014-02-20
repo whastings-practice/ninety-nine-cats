@@ -8,6 +8,13 @@
 <body>
 
   <div class="container content-main">
+    <% if flash[:notice] %>
+      <div class="row">
+        <div class="alert alert-info col-md-12">
+          <%= notice %>
+        </div>
+      </div>
+    <% end %>
     <div class="row">
       <%= yield %>
     </div>
