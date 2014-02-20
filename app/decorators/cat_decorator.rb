@@ -13,6 +13,10 @@ class CatDecorator < Draper::Decorator
     end
   end
 
+  def sex_string
+    sex_options[object.sex]
+  end
+
   def sex_checked(sex)
     if object.sex == sex
       ' checked="checked"'
