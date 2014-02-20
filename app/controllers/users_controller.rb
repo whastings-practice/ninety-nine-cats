@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  include Authorization
+
+  before_action :require_signed_out, only: [:new, :create]
+
   def new
     @user = User.new.decorate
     render :new
@@ -8,6 +12,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       flash[:notice] = "Sign-up successful!"
+      sign_in_user(user)
       redirect_to cats_url
     else
       @user = user.decorate
