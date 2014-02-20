@@ -6,42 +6,50 @@
     <input type="hidden" name="_method" value="PATCH">
   <% end %>
 
-  <div class="form-group">
-    <label for="cat_name">Name</label>
-    <input type="text" name="cat[name]" id="cat_name" value="<%= cat.name %>">
-  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="cat_name">Name</label>
+        <input type="text" name="cat[name]" id="cat_name" value="<%= cat.name %>">
+      </div>
 
-  <div class="form-group">
-    <label for="cat_age">Age</label>
-    <input type="text" name="cat[age]" id="cat_age" value="<%= cat.age %>">
-  </div>
+      <div class="form-group">
+        <label for="cat_age">Age</label>
+        <input type="text" name="cat[age]" id="cat_age" value="<%= cat.age %>">
+      </div>
 
-  <div class="form-group">
-    <strong>Sex</strong>
-    <% cat.sex_options.each do |value, name| %>
-      <label for="<%= name %>_option"><%= name %></label>
-      <input type="radio" name="cat[sex]"
-             id="<%= name %>_option"
-             value="<%= value %>"<%= cat.sex_checked(value) %>>
-    <% end %>
-  </div>
+      <div class="form-group">
+        <strong>Sex</strong>
+        <% cat.sex_options.each do |value, name| %>
+          <div class="radio">
+            <label for="<%= name %>_option"><%= name %></label>
+            <input type="radio" name="cat[sex]"
+                   id="<%= name %>_option"
+                   value="<%= value %>"<%= cat.sex_checked(value) %>>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-  <div class="form-group">
-    <label for="cat_color">Color</label>
-    <select name="cat[color]" id="cat_color">
-      <option></option>
-      <% cat.color_options.each do |value, name| %>
-        <option value="<%= value %>"<%= cat.color_selected(value) %>>
-          <%= name %>
-        </option>
-      <% end %>
-    </select>
-  </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="cat_color">Color</label>
+        <select name="cat[color]" id="cat_color">
+          <option></option>
+          <% cat.color_options.each do |value, name| %>
+            <option value="<%= value %>"<%= cat.color_selected(value) %>>
+              <%= name %>
+            </option>
+          <% end %>
+        </select>
+      </div>
 
-  <div class="form-group">
-    <label for="cat_birth_date"></label>
-    <input type="date" name="cat[birth_date]"
-           id="cat_birth_date" value="<%= cat.birth_date %>">
+      <div class="form-group">
+        <label for="cat_birth_date">Birth Date</label>
+        <input type="date" name="cat[birth_date]"
+               id="cat_birth_date" value="<%= cat.birth_date %>">
+      </div>
+    </div>
   </div>
 
   <input type="submit" value="<%= cat.submit_text %>" class="btn btn-primary">
