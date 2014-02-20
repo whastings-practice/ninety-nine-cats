@@ -27,6 +27,10 @@ class CatRentalRequest < ActiveRecord::Base
 
   before_validation :check_status
 
+  def self.requests_for_cat(cat_id)
+    where(cat_id: cat_id).order(:start_date)
+  end
+
   protected
 
   def check_status

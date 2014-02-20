@@ -7,6 +7,8 @@ class CatsController < ApplicationController
 
   def show
     @cat = Cat.find(params[:id])
+    @rental_requests = CatRentalRequest.requests_for_cat(@cat.id)
+      .pluck(:start_date, :end_date)
     render :show
   end
 

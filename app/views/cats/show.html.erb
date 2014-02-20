@@ -19,6 +19,27 @@
       </tr>
     </tbody>
   </table>
+
+  <% if @rental_requests.any? %>
+    <h2>Rental Requests</h2>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Start Date</th>
+          <th>End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rental_requests.each do |(start_date, end_date)| %>
+          <tr>
+            <td><%= start_date %></td>
+            <td><%= end_date %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
   <%= link_to 'Edit Cat', edit_cat_url(@cat), class: "btn btn-success" %>
   <%= link_to 'Go Back', cats_url, class: "btn btn-info" %>
 </div>
