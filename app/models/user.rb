@@ -18,6 +18,13 @@ class User < ActiveRecord::Base
 
   before_validation :check_session_token
 
+  has_many(
+    :cats,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: "Cat"
+  )
+
   SESSION_TOKEN_LENGTH = 16
 
   def self.new_session_token
@@ -42,6 +49,10 @@ class User < ActiveRecord::Base
 
   def is_password?(password_string)
     BCrypt::Password.new(self.password_digest).is_password?(password_string)
+  end
+
+  def owns_cat?(cat_id)
+    self.cats.where(id: cat_id).exists?
   end
 
   private

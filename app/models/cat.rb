@@ -10,13 +10,14 @@
 #  sex        :string(1)
 #  created_at :datetime
 #  updated_at :datetime
+#  user_id    :integer          default(0), not null
 #
 
 class Cat < ActiveRecord::Base
   ALLOWED_COLORS = %w(black white gray orange brown)
   SEXES = { "M" => "male", "F" => "female" }
 
-  validates :name, presence: true
+  validates :name, :user_id, presence: true
   validates :age, numericality: true
   validates :color, inclusion: { in: ALLOWED_COLORS }
   validates :sex, inclusion: { in: SEXES.keys }
@@ -27,5 +28,12 @@ class Cat < ActiveRecord::Base
     foreign_key: :cat_id,
     class_name: "CatRentalRequest",
     dependent: :destroy
+  )
+
+  belongs_to(
+    :owner,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: "User"
   )
 end
