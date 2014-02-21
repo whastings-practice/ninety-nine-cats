@@ -6,18 +6,23 @@ module Authentication
   end
 
   def current_user
-    return nil unless session[:token]
-    @current_user ||= Session.find_user_by_token(session[:token])
+    return nil unless cookies[:token]
+    @current_user ||= Session.find_user_by_token(cookies[:token])
   end
 
   def sign_in_user(user)
     reset_session
-    session[:token] = user.sessions.create!.token
+    new_token = user.sessions.create!.token
+    cookies[:token] = {
+      value: new_token,
+      httponly: true,
+      expires: 1.week.from_now
+    }
     @current_user = user
   end
 
   def sign_out_user(user)
-    Session.find_by_token(session[:token]).try(:destroy)
-    session[:token] = nil
+    Session.find_by_token(cookies[:token]).try(:destroy)
+    cookies.delete(:token)
   end
 end
