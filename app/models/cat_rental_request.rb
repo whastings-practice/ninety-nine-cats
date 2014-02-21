@@ -9,12 +9,13 @@
 #  status     :string(10)       not null
 #  created_at :datetime
 #  updated_at :datetime
+#  user_id    :integer
 #
 
 class CatRentalRequest < ActiveRecord::Base
   STATUSES = %w(PENDING APPROVED DENIED)
 
-  validates :cat_id, :start_date, :end_date, :status, presence: true
+  validates :cat_id, :start_date, :end_date, :status, :user_id, presence: true
   validates :status, inclusion: { in: STATUSES }
   validate :overlapping_approved_requests
 
@@ -23,6 +24,13 @@ class CatRentalRequest < ActiveRecord::Base
     primary_key: :id,
     foreign_key: :cat_id,
     class_name: "Cat"
+  )
+
+  belongs_to(
+    :user,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: "User"
   )
 
   before_validation :check_status

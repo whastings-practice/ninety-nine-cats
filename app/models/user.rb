@@ -5,7 +5,6 @@
 #  id              :integer          not null, primary key
 #  user_name       :string(50)       not null
 #  password_digest :string(60)       not null
-#  session_token   :string(100)      not null
 #  created_at      :datetime
 #  updated_at      :datetime
 #
@@ -28,6 +27,13 @@ class User < ActiveRecord::Base
     primary_key: :id,
     foreign_key: :user_id,
     class_name: "Session"
+  )
+
+  has_many(
+    :rental_requests,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: "CatRentalRequest"
   )
 
   def self.find_by_credentials(user_name, password)

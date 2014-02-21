@@ -25,6 +25,7 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
+          <th>Requestor</th>
           <th>Start Date</th>
           <th>End Date</th>
           <th>Status</th>
@@ -36,6 +37,7 @@
       <tbody>
         <% @rental_requests.each do |rental_request| %>
           <tr>
+            <td><%= rental_request.user.user_name %></td>
             <td><%= pretty_date(rental_request.start_date) %></td>
             <td><%= pretty_date(rental_request.end_date) %></td>
             <td><%= rental_request.status %></td>
