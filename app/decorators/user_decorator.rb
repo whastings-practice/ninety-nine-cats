@@ -10,6 +10,6 @@ class UserDecorator < Draper::Decorator
   end
 
   def submit_text
-    object.persisted? ? "Edit User" : "Add User"
+    object.persisted? ? "Edit User" : "Sign Up"
   end
 end

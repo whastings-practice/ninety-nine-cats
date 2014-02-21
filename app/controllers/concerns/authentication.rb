@@ -7,17 +7,17 @@ module Authentication
 
   def current_user
     return nil unless session[:token]
-    @current_user ||= User.find_by_session_token(session[:token])
+    @current_user ||= Session.find_user_by_token(session[:token])
   end
 
   def sign_in_user(user)
     reset_session
-    session[:token] = user.reset_session_token!
+    session[:token] = user.sessions.create!.token
     @current_user = user
   end
 
   def sign_out_user(user)
-    user.reset_session_token!
+    Session.find_by_token(session[:token]).try(:destroy)
     session[:token] = nil
   end
 end

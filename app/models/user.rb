@@ -11,12 +11,10 @@
 #
 
 class User < ActiveRecord::Base
-  validates :user_name, :password_digest, :session_token, presence: true
-  validates :user_name, :session_token, uniqueness: true
+  validates :user_name, :password_digest, presence: true
+  validates :user_name, uniqueness: true
   validates :user_name, length: { minimum: 3, maximum: 50 }
   validates :password, length: { minimum: 6, allow_nil: true }
-
-  before_validation :check_session_token
 
   has_many(
     :cats,
@@ -25,21 +23,16 @@ class User < ActiveRecord::Base
     class_name: "Cat"
   )
 
-  SESSION_TOKEN_LENGTH = 16
-
-  def self.new_session_token
-    SecureRandom::urlsafe_base64(SESSION_TOKEN_LENGTH)
-  end
+  has_many(
+    :sessions,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: "Session"
+  )
 
   def self.find_by_credentials(user_name, password)
     user = self.find_by_user_name(user_name)
     (user && user.is_password?(password)) ? user : nil
-  end
-
-  def reset_session_token!
-    self.session_token = self.class.new_session_token
-    self.save!
-    self.session_token
   end
 
   def password=(password_string)
@@ -58,8 +51,4 @@ class User < ActiveRecord::Base
   private
 
   attr_reader :password
-
-  def check_session_token
-    self.session_token ||= self.class.new_session_token
-  end
 end
