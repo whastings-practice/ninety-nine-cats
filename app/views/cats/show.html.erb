@@ -1,24 +1,31 @@
 <div class="col-md-12 cat-display">
   <h1><%= @cat.name %></h1>
 
-  <table class="table table-striped table-bordered">
-    <thead>
-      <tr>
-        <th>Age</th>
-        <th>Birth Date</th>
-        <th>Color</th>
-        <th>Sex</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= @cat.age %></td>
-        <td><%= pretty_date(@cat.birth_date) %></td>
-        <td><%= @cat.color.capitalize %></td>
-        <td><%= @cat.sex_string.capitalize %></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row clearfix cat-profile">
+    <div class="col-md-3">
+      <%= image_tag @cat.photo.url %>
+    </div>
+    <div class="col-md-9">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Age</th>
+            <th>Birth Date</th>
+            <th>Color</th>
+            <th>Sex</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @cat.age %></td>
+            <td><%= pretty_date(@cat.birth_date) %></td>
+            <td><%= @cat.color.capitalize %></td>
+            <td><%= @cat.sex_string.capitalize %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <% if @rental_requests.any? %>
     <h2>Rental Requests</h2>
@@ -59,8 +66,14 @@
     </table>
   <% end %>
 
-  <% if @owns_cat %>
-    <%= link_to 'Edit Cat', edit_cat_url(@cat), class: "btn btn-success" %>
-  <% end %>
-  <%= link_to 'Go Back', cats_url, class: "btn btn-info" %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <% if @owns_cat %>
+          <%= link_to 'Edit Cat', edit_cat_url(@cat), class: "btn btn-success" %>
+        <% end %>
+        <%= link_to 'Go Back', cats_url, class: "btn btn-info" %>
+      </div>
+    </div>
+  </div>
 </div>

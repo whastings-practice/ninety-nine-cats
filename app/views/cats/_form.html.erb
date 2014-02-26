@@ -1,6 +1,7 @@
 <%= render 'shared/errors' %>
 
-<form action="<%= cat.form_url %>" method="post" accept-charset="utf-8">
+<form action="<%= cat.form_url %>" method="post" accept-charset="utf-8"
+      enctype="multipart/form-data">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <% if cat.persisted? %>
     <input type="hidden" name="_method" value="PATCH">
@@ -48,6 +49,11 @@
         <label for="cat_birth_date">Birth Date</label>
         <input type="date" name="cat[birth_date]"
                id="cat_birth_date" value="<%= cat.birth_date %>">
+      </div>
+
+      <div class="form-group">
+        <label for="cat_photo">Photo</label>
+        <input type="file" name="cat[photo]" id="cat_photo">
       </div>
     </div>
   </div>

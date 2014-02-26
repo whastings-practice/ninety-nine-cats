@@ -22,6 +22,9 @@ class Cat < ActiveRecord::Base
   validates :color, inclusion: { in: ALLOWED_COLORS }
   validates :sex, inclusion: { in: SEXES.keys }
 
+  has_attached_file :photo
+  validates_attachment_content_type :photo, content_type:  /\Aimage\/.*\Z/
+
   has_many(
     :rental_requests,
     primary_key: :id,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221143839) do
+ActiveRecord::Schema.define(version: 20140226191408) do
 
   create_table "cat_rental_requests", force: true do |t|
     t.integer  "cat_id",                null: false
@@ -27,14 +27,18 @@ ActiveRecord::Schema.define(version: 20140221143839) do
   add_index "cat_rental_requests", ["user_id"], name: "index_cat_rental_requests_on_user_id"
 
   create_table "cats", force: true do |t|
-    t.string   "name",                              null: false
+    t.string   "name",                                      null: false
     t.integer  "age"
     t.date     "birth_date"
-    t.string   "color",      limit: 20
-    t.string   "sex",        limit: 1
+    t.string   "color",              limit: 20
+    t.string   "sex",                limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",               default: 0, null: false
+    t.integer  "user_id",                       default: 0, null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "cats", ["user_id"], name: "index_cats_on_user_id"

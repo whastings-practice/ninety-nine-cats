@@ -34,10 +34,18 @@ textarea {
   @extend .form-control;
 }
 
+img {
+  @extend .img-responsive;
+}
+
 .user-controls {
   padding: 10px;
   .button_to {
     float: right;
   }
+}
+
+.cat-profile {
+  margin-bottom: 10px;
 }
 

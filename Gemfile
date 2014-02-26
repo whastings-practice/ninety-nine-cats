@@ -17,6 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'draper', '~> 1.3'
+gem "paperclip", "~> 4.1"
 
 group :development do
   gem "annotate"
