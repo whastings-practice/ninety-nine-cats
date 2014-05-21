@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       flash[:notice] = "Sign-up successful!"
+      UserMailer.welcome_email(user.id).deliver
       sign_in_user(user)
       redirect_to cats_url
     else
