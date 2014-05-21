@@ -16,6 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'draper', '~> 1.3'
 gem "paperclip", "~> 4.1"
+gem 'delayed_job_active_record'
 
 group :development do
   gem "annotate"
