@@ -31,6 +31,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
