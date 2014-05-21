@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226191408) do
+ActiveRecord::Schema.define(version: 20140521174308) do
 
   create_table "cat_rental_requests", force: true do |t|
     t.integer  "cat_id",                null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20140226191408) do
     t.string   "password_digest", limit: 60, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
   end
 
 end

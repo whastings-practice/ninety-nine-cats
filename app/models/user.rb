@@ -7,6 +7,7 @@
 #  password_digest :string(60)       not null
 #  created_at      :datetime
 #  updated_at      :datetime
+#  email           :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -14,6 +15,7 @@ class User < ActiveRecord::Base
   validates :user_name, uniqueness: true
   validates :user_name, length: { minimum: 3, maximum: 50 }
   validates :password, length: { minimum: 6, allow_nil: true }
+  validates :email, presence: true
 
   has_many(
     :cats,
