@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     if user.save
       flash[:notice] = "Sign-up successful!"
       UserMailer.delay.welcome_email(user.id)
+      user.send_reminder_email
       sign_in_user(user)
       redirect_to cats_url
     else

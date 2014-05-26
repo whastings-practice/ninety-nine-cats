@@ -56,6 +56,11 @@ class User < ActiveRecord::Base
     self.cats.where(id: cat_id).exists?
   end
 
+  def send_reminder_email
+    UserMailer.reminder_email(self).deliver
+  end
+  handle_asynchronously :send_reminder_email, run_at: -> { 1.week.from_now }
+
   private
 
   attr_reader :password

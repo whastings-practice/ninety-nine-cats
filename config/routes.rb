@@ -15,4 +15,6 @@ NinetyNineCats::Application.routes.draw do
 
   resource :session, only: [:new, :create, :destroy]
 
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
 end
